@@ -1,0 +1,23 @@
+# Ignore Python bytecode files
+**/__pycache__/
+**/*.pyc
+**/*.pyo
+**/*.pyd
+
+# Ignore database files
+**/*.db
+**/*.sqlite3
+
+# Ignore log files
+**/*.log
+
+# Ignore virtual environment folders
+**/venv/
+**/env/
+**/.venv/
+**/.env/
+**/venv.bak/
+**/env.bak/
+
+# Ignore Django migration files (globally within any app's migrations folder)
+**/migrations/
