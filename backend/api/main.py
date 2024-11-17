@@ -11,11 +11,12 @@ from fastapi import FastAPI, HTTPException, Body
 from pydantic import BaseModel
 from django.conf import settings
 from django.db import IntegrityError
-from frontend.models import Register 
+from frontend.models import Register, Contact
 from django.core.exceptions import ValidationError
 from fastapi.responses import RedirectResponse
 from asgiref.sync import sync_to_async 
 from fastapi.middleware.cors import CORSMiddleware
+from django.contrib.auth.hashers import check_password, make_password
 
 app = FastAPI()
 
@@ -34,10 +35,15 @@ class RegisterForm(BaseModel):
     email: str
     password: str
 
+class Login(BaseModel):
+    email: str
+    password: str
 
-@app.get("/")
-async def demo():
-    return {"message": "hello harsh"}
+class ContactUs(BaseModel):
+    name: str
+    email: str
+    phone_no: str
+    message: str
 
 @app.post("/api/register")
 async def register_user(details: RegisterForm):
@@ -45,11 +51,44 @@ async def register_user(details: RegisterForm):
         new_entry = await sync_to_async(Register.objects.create)(
             name=details.name,
             email=details.email,
-            password=details.password
+            password=make_password(details.password)
         )
-        return {"msg" : "user is registered sucesfully"}
-        # return RedirectResponse(url='/index.html', status_code=302)
+        return {"msg" : "user is registered sucesfully", "name": details.name}
 
     except ValidationError as e:
         raise HTTPException(status_code=400, detail=f"Validation Error: {e}")
-    
+
+@app.post("/api/login")
+async def login_user(details: Login):
+    try:
+        # Check if user exists with the provided email
+        user = await sync_to_async(get_user_by_email)(details.email)
+        if not user:
+            return {"msg" : "Email not exists"}
+        if not check_password(details.password, user.password):
+            return {"msg": "Password do not match, Try again!"}
+        return {"msg": "Succesfully Logged in", "username": user.name}
+
+    except Exception as e:
+        raise HTTPException(status_code=500, detail=f"An error occurred: {str(e)}")
+
+def get_user_by_email(email: str):
+    try:
+        user = Register.objects.filter(email=email).first()
+        return user
+    except Register.DoesNotExist:
+        return None
+
+@app.post("/api/contact")
+async def contact_us(details: ContactUs):
+    try:
+        new_entry = await sync_to_async(Contact.objects.create)(
+            name=details.name,
+            email=details.email,
+            phone_no=details.phone_no,
+            message=details.message
+        )
+        return {"msg": "Your message has been sent successfully!"}
+
+    except ValidationError as e:
+        raise HTTPException(status_code=400, detail=f"Validation Error: {e}")

@@ -103,6 +103,7 @@
 
             const data = await response.json();
             if (response.ok) {
+                localStorage.setItem('userName', data.name);
                 window.location.href = "/"; 
             } else {
                 alert('Error: ' + data.detail);

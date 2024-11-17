@@ -1,40 +1,120 @@
 <div class="container-fluid navbar-style py-3"></div>
-    <div class="row">
-        <div class="col-md-10 col-12 mx-auto">
+<div class="row">
+    <div class="col-md-10 col-12 mx-auto">
+        <nav class="navbar navbar-expand-lg navbar-light bg-light">
+            <h2 class="nav" href="/">CODE BAZAR</h2>
+            <button class="navbar-toggler" type="button" data-toggle="collapse"
+                data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false"
+                aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
 
-
-            <nav class="navbar navbar-expand-lg navbar-light bg-light">
-                <h2 class="nav" href="/">CODE BAZAR</h2>
-                <button class="navbar-toggler" type="button" data-toggle="collapse"
-                    data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false"
-                    aria-label="Toggle navigation">
-                    <span class="navbar-toggler-icon"></span>
-                </button>
-
-                <div class="collapse navbar-collapse" id="navbarSupportedContent">
-                    <ul class="navbar-nav ml-auto">
-                        <li class="nav-item active">
-                            <a class="nav-link" href="/">Home <span class="sr-only">(current)</span></a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link" href="#aboutid">Mentors</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link" href="#serviceid">Courses</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link" href="#harshid">Testimonials</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link" href="#contactid">Contact</a>
-                        </li>
-                        <li class="nav-item"></li>
-                            <a class="nav-link" href="{% url 'login' %}">Login</a>
-                        </li>
-                    </ul>
-                </div>
-            </nav>
-
-        </div>
+            <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                <ul class="navbar-nav ml-auto">
+                    <li class="nav-item active">
+                        <a class="nav-link" href="/">Home <span class="sr-only">(current)</span></a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#aboutid">Mentors</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#serviceid">Courses</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#harshid">Testimonials</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#contactid">Contact</a>
+                    </li>
+                    <!-- Dynamic Login/Logout or User's Initials Circle -->
+                    <li class="nav-item" id="userNavItem">
+                        <a class="nav-link" id="loginLink" href="{% url 'login' %}">Login</a>
+                    </li>
+                    <!-- User's Initials Circle (for logged-in users) -->
+                    <li class="nav-item" id="userNameNavItem" style="display: none;">
+                        <div class="dropdown" id="userCircle">
+                            <!-- Circle with the user's initial -->
+                            <a class="nav-link" href="#" id="userNameLink" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                <div class="user-initials" id="userCircleInitial">
+                                    <!-- This will display the user's initial -->
+                                </div>
+                            </a>
+                            <!-- Dropdown Menu -->
+                            <div class="dropdown-menu" aria-labelledby="userNameLink">
+                                <a class="dropdown-item" href="/" id="userNameOption"><span id="userNameDropdown"></span></a>
+                                <a class="dropdown-item" href="#" id="logoutLink">Logout</a>
+                            </div>
+                        </div>
+                    </li>
+                </ul>
+            </div>
+        </nav>
     </div>
 </div>
+
+<script>
+    // Check if the user is logged in (if their name exists in localStorage)
+    const userName = localStorage.getItem('userName');
+    const loginLink = document.getElementById('loginLink');
+    const userNavItem = document.getElementById('userNavItem');
+    const userNameNavItem = document.getElementById('userNameNavItem');
+    const userNameLink = document.getElementById('userNameLink');
+    const userCircleInitial = document.getElementById('userCircleInitial');
+    const userNameDropdown = document.getElementById('userNameDropdown');
+    const logoutLink = document.getElementById('logoutLink');
+    const userNameOption = document.getElementById('userNameOption');
+
+    if (userName) {
+        // If the user is logged in, show their initial in the circle and the dropdown
+        userNavItem.style.display = 'none'; 
+        userNameNavItem.style.display = 'block';
+
+        const initial = userName.charAt(0).toUpperCase(); 
+        userCircleInitial.textContent = initial;
+        userNameDropdown.innerHTML = `${userName}`;
+    }
+
+    logoutLink.addEventListener('click', function() {
+        localStorage.removeItem('userName');
+        window.location.reload(); 
+    });
+</script>
+
+<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+
+<style>
+    #userCircle {
+        display: inline-block;
+        position: relative;
+    }
+
+    .user-initials {
+        width: 40px;
+        height: 40px;
+        border-radius: 50%;
+        background-color: #007bff; /* Blue background */
+        color: white;
+        text-align: center;
+        line-height: 40px;
+        font-size: 18px;
+        font-weight: bold;
+    }
+
+    /* Styling for the dropdown menu */
+    .dropdown-menu {
+        left: auto;
+        right: 0;
+    }
+
+    /* Show the dropdown when the user hovers over the circle */
+    #userCircle:hover .dropdown-menu {
+        display: block;
+    }
+
+    /* Optional: Add some space between the items */
+    .dropdown-item {
+        cursor: pointer;
+    }
+</style>
