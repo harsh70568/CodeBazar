@@ -1,54 +1,57 @@
-<div class="container-fluid navbar-style py-3"></div>
-<div class="row">
-    <div class="col-md-10 col-12 mx-auto">
-        <nav class="navbar navbar-expand-lg navbar-light bg-light">
-            <h2 class="nav" href="/">CODE BAZAR</h2>
-            <button class="navbar-toggler" type="button" data-toggle="collapse"
-                data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false"
-                aria-label="Toggle navigation">
-                <span class="navbar-toggler-icon"></span>
-            </button>
+<div class="container-fluid navbar-style py-3">
+    <div class="row">
+        <div class="col-md-10 col-12 mx-auto">
+            <nav class="navbar navbar-expand-lg navbar-light">
+                <a class="navbar-brand" href="/">
+                    <h2 class="nav mb-0">CODE BAZAR</h2>
+                </a>
+                <button class="navbar-toggler" type="button" data-toggle="collapse"
+                    data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false"
+                    aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
 
-            <div class="collapse navbar-collapse" id="navbarSupportedContent">
-                <ul class="navbar-nav ml-auto">
-                    <li class="nav-item active">
-                        <a class="nav-link" href="/">Home <span class="sr-only">(current)</span></a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="#aboutid">Mentors</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="#serviceid">Courses</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="#harshid">Testimonials</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="#contactid">Contact</a>
-                    </li>
-                    <!-- Dynamic Login/Logout or User's Initials Circle -->
-                    <li class="nav-item" id="userNavItem">
-                        <a class="nav-link" id="loginLink" href="{% url 'login' %}">Login</a>
-                    </li>
-                    <!-- User's Initials Circle (for logged-in users) -->
-                    <li class="nav-item" id="userNameNavItem" style="display: none;">
-                        <div class="dropdown" id="userCircle">
-                            <!-- Circle with the user's initial -->
-                            <a class="nav-link" href="#" id="userNameLink" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                <div class="user-initials" id="userCircleInitial">
-                                    <!-- This will display the user's initial -->
+                <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                    <ul class="navbar-nav ml-auto">
+                        <li class="nav-item active">
+                            <a class="nav-link" href="/">Home <span class="sr-only">(current)</span></a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="#aboutid">Mentors</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="#serviceid">Courses</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="#harshid">Testimonials</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="#contactid">Contact</a>
+                        </li>
+                        <!-- Dynamic Login/Logout or User's Initials Circle -->
+                        <li class="nav-item" id="userNavItem">
+                            <a class="nav-link" id="loginLink" href="{% url 'login' %}">Login</a>
+                        </li>
+                        <!-- User's Initials Circle (for logged-in users) -->
+                        <li class="nav-item" id="userNameNavItem" style="display: none;">
+                            <div class="dropdown" id="userCircle">
+                                <!-- Circle with the user's initial -->
+                                <a class="nav-link" href="#" id="userNameLink">
+                                    <div class="user-initials" id="userCircleInitial"></div>
+                                </a>
+                                <!-- Dropdown Menu -->
+                                <div class="dropdown-menu" aria-labelledby="userNameLink">
+                                    <a class="dropdown-item" href="/" id="userNameOption">
+                                        <span id="userNameDropdown" class="dropdown-username"></span>
+                                    </a>
+                                    <a class="dropdown-item" href="#" id="logoutLink">Logout</a>
                                 </div>
-                            </a>
-                            <!-- Dropdown Menu -->
-                            <div class="dropdown-menu" aria-labelledby="userNameLink">
-                                <a class="dropdown-item" href="/" id="userNameOption"><span id="userNameDropdown"></span></a>
-                                <a class="dropdown-item" href="#" id="logoutLink">Logout</a>
                             </div>
-                        </div>
-                    </li>
-                </ul>
-            </div>
-        </nav>
+                        </li>
+                    </ul>
+                </div>
+            </nav>
+        </div>
     </div>
 </div>
 
@@ -85,36 +88,155 @@
 <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
 
 <style>
-    #userCircle {
-        display: inline-block;
-        position: relative;
+    /* Navbar Styling */
+    .navbar-style {
+        background: linear-gradient(90deg, #6a11cb 0%, #2575fc 100%);
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        padding: 0.5rem 1rem;
     }
 
-    .user-initials {
-        width: 40px;
-        height: 40px;
-        border-radius: 50%;
-        background-color: #007bff; /* Blue background */
-        color: white;
-        text-align: center;
-        line-height: 40px;
-        font-size: 18px;
+    .navbar-brand h2 {
+        font-family: 'Roboto', sans-serif;
+        color: #fff;
+        font-weight: 700;
+        text-transform: uppercase;
+        letter-spacing: 2px;
+        font-size: 1.8rem;
+    }
+
+    .navbar-nav .nav-link {
+        font-size: 1.1rem;
+        font-weight: 500;
+        color: #fff !important;
+        padding: 0.5rem 1rem; /* Same padding for all nav items */
+        transition: color 0.3s ease;
+    }
+
+    .navbar-nav .nav-link:hover {
+        color: #ff9f00 !important;
+    }
+
+    .navbar-nav .nav-link.active {
+        color: #ff9f00 !important;
         font-weight: bold;
     }
 
-    /* Styling for the dropdown menu */
-    .dropdown-menu {
-        left: auto;
-        right: 0;
+    /* User's Initial Circle */
+    #userCircle {
+        position: relative;
+        display: inline-block;
     }
 
-    /* Show the dropdown when the user hovers over the circle */
+    .user-initials {
+        width: 35px;  /* Match navbar item width */
+        height: 35px; /* Match navbar item height */
+        border-radius: 50%;
+        background-color: #ff9f00;
+        color: white;
+        text-align: center;
+        line-height: 35px;
+        font-size: 16px;  /* Fit text inside circle */
+        font-weight: bold;
+        transition: transform 0.3s ease, background-color 0.3s ease;
+    }
+
+    .user-initials:hover {
+        transform: scale(1.1);
+        background-color: #e68900;
+    }
+
+    /* Styling for the dropdown menu */
+.dropdown-menu {
+    left: auto;
+    right: 0;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    border-radius: 8px;
+    padding: 0.5rem 0;
+    background: #fff;
+    width: 200px; /* Maintain fixed dropdown width */
+    display: none; /* Hide dropdown by default */
+}
+
+/* Remove extra left padding from dropdown items to align them */
+    /* Styling for the dropdown menu */
+.dropdown-menu {
+    left: auto;
+    right: 0;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    border-radius: 8px;
+    padding: 0.5rem 0;
+    background: #fff;
+    width: 100%; /* Adjust dropdown width to fit the container */
+    display: none; /* Hide dropdown by default */
+}
+
+/* Username and Logout Item Styling */
+.dropdown-item {
+    font-size: 1.25rem; /* Increase font size */
+    padding: 12px 20px;  /* Add consistent padding */
+    color: #333;
+    transition: background-color 0.3s ease;
+    display: block;
+    width: 100%; /* Ensure both items span full width */
+    text-align: left; /* Align text to the left */
+}
+
+/* Hover effect for items */
+.dropdown-item:hover {
+    background-color: #f1f1f1;
+}
+
+/* Username styling */
+#userNameOption {
+    font-size: 1.25rem; /* Increase font size */
+    font-weight: 500; /* Slightly bolder */
+    color: #333;
+    padding: 12px 20px;  /* Match padding with Logout */
+    text-align: left; /* Left-align the text */
+}
+
+/* Logout link styling */
+#logoutLink {
+    font-size: 1.25rem; /* Increase font size */
+    padding: 12px 20px;  /* Match padding with Username */
+    text-align: left; /* Left-align the text */
+    color: #333;
+}
+
+/* Optional: You can make the dropdown fade in and out smoothly */
+#userCircle:hover .dropdown-menu {
+    display: block;
+}
+
+
+    /* Ensuring the navbar does not increase in height */
+    .navbar-nav {
+        display: flex;
+        align-items: center; /* Vertically center all items */
+    }
+
+    .navbar-nav .nav-item {
+        padding: 0; /* Remove extra padding */
+    }
+
+    /* Hover effect to display the dropdown */
     #userCircle:hover .dropdown-menu {
         display: block;
     }
 
-    /* Optional: Add some space between the items */
-    .dropdown-item {
-        cursor: pointer;
+    /* Responsive adjustments */
+    @media (max-width: 768px) {
+        .navbar-nav .nav-link {
+            font-size: 1rem;
+        }
+
+        .user-initials {
+            font-size: 14px;  /* Adjust for smaller screens */
+        }
+
+        /* Adjust dropdown width on smaller screens */
+        .dropdown-menu {
+            width: 180px;
+        }
     }
 </style>
