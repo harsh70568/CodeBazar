@@ -57,6 +57,30 @@
     <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
 
-</body>
+    <script>
+        window.addEventListener('DOMContentLoaded', () => {
+            const successMessage = localStorage.getItem('successMessage');
+            if (successMessage) {
+                const messageBox = document.createElement('div');
+                messageBox.className = 'alert alert-success text-center shadow';
+                messageBox.style.position = 'fixed';
+                messageBox.style.top = '20px';
+                messageBox.style.left = '50%';
+                messageBox.style.transform = 'translateX(-50%)';
+                messageBox.style.zIndex = '1050';
+                messageBox.style.minWidth = '300px';
+                messageBox.style.padding = '10px';
+                messageBox.style.borderRadius = '8px';
+                messageBox.style.boxShadow = '0px 4px 6px rgba(0, 0, 0, 0.1)';
+                messageBox.textContent = successMessage;
 
+                document.body.appendChild(messageBox);
+                setTimeout(() => {
+                    messageBox.remove();
+                    localStorage.removeItem('successMessage');
+                }, 3000);
+            }
+        });
+    </script>
+</body>
 </html>

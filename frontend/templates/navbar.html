@@ -79,7 +79,10 @@
 
     logoutLink.addEventListener('click', function() {
         localStorage.removeItem('userName');
-        window.location.reload(); 
+        localStorage.setItem('successMessage', 'Logged out succesfully!');
+        setTimeout(() => {
+            window.location.reload(); 
+        }, 500);
     });
 </script>
 

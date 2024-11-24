@@ -18,7 +18,7 @@ class Login(models.Model):
 class Contact(models.Model):
     name = models.CharField(max_length=50)
     email = models.EmailField(max_length=50)
-    phone_no = models.CharField(max_length=10)
+    subject = models.CharField(max_length=50, blank=True)
     message = models.TextField()
 
     class Meta:

@@ -46,9 +46,8 @@
   <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
 
   <script>
-      // Handle form submission
       document.getElementById('loginForm').addEventListener('submit', async function (event) {
-          event.preventDefault(); // Prevent default form submission
+          event.preventDefault();
 
           const email = document.getElementById('email').value;
           const password = document.getElementById('password').value;
@@ -66,17 +65,12 @@
               const responseMessage = document.getElementById('responseMessage');
 
               if (response.ok && data.msg === "Succesfully Logged in") {
-                  responseMessage.classList.remove('alert-danger');
-                  responseMessage.classList.add('alert-success');
-                  responseMessage.textContent = data.msg || "Successfully logged in!";
-                  responseMessage.style.display = 'block';
-
-                  localStorage.setItem('loginMessage', 'Successfully Logged in');
+                  localStorage.setItem('successMessage', 'Successfully Logged in');
                   localStorage.setItem('userName', data.username);
-
-                  window.location.href = '/';
+                  setTimeout(() => {
+                    window.location.href = "/";
+                  }, 200);
               } else {
-                  // Show error message for 2 seconds
                   responseMessage.classList.remove('alert-success');
                   responseMessage.classList.add('alert-danger');
                   responseMessage.textContent = data.msg || "Login failed!";
@@ -88,7 +82,6 @@
               }
 
           } catch (error) {
-              // Handle network or other errors
               const responseMessage = document.getElementById('responseMessage');
               responseMessage.classList.remove('alert-success');
               responseMessage.classList.add('alert-danger');

@@ -125,9 +125,8 @@
 
 <script>
     document.getElementById('contactForm').addEventListener('submit', async function (event) {
-        event.preventDefault(); // Prevent the default form submission
+        event.preventDefault(); 
 
-        // Gather form data
         const formData = {
             name: document.getElementById('name').value,
             email: document.getElementById('email').value,
