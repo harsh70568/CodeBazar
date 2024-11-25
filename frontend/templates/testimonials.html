@@ -1,19 +1,97 @@
 <div class="testimonial-section" id="harshid">
-    <h2 class="testimonial-heading">What Our Students Say</h2>
-    <div class="testimonial-container">
+  <h2 class="testimonial-heading">What Our Students Say</h2>
+  <div class="testimonial-container">
       <div class="testimonial">
-        <p class="testimonial-text">"I've learned so much from this coding website. The tutorials are clear and easy to follow. Highly recommended!"</p>
-        <p class="testimonial-author">- Harsh Vardhan Gautam</p>
+          <p class="testimonial-text">"I've learned so much from this coding website. The tutorials are clear and easy to follow. Highly recommended!"</p>
+          <p class="testimonial-author">- Harsh Vardhan Gautam</p>
       </div>
-  
+
       <div class="testimonial">
-        <p class="testimonial-text">"This coding website has been a game-changer for me. The resources provided here have helped me improve my skills and land a job as a developer!"</p>
-        <p class="testimonial-author">- Rachit Mishra</p>
+          <p class="testimonial-text">"This coding website has been a game-changer for me. The resources provided here have helped me improve my skills and land a job as a developer!"</p>
+          <p class="testimonial-author">- Rachit Mishra</p>
       </div>
-  
+
       <div class="testimonial">
-        <p class="testimonial-text">"The coding exercises on this website are challenging and practical. They have greatly enhanced my problem-solving abilities."</p>
-        <p class="testimonial-author">- Naman Yadav</p>
+          <p class="testimonial-text">"The coding exercises on this website are challenging and practical. They have greatly enhanced my problem-solving abilities."</p>
+          <p class="testimonial-author">- Naman Yadav</p>
       </div>
-    </div>
   </div>
+</div>
+
+<style>
+  /* Testimonial Section Styles */
+.testimonial-section {
+    background-color: #f9f9f9; /* Light grey background */
+    padding: 50px 0;
+    text-align: center;
+}
+
+.testimonial-heading {
+    font-family: 'Poppins', sans-serif;
+    font-size: 3.5rem; /* Increased font size */
+    font-weight: 700; /* Bolder font weight */
+    color: #333;
+    margin-bottom: 40px;
+    letter-spacing: 2px; /* Slight letter-spacing for a more modern touch */
+}
+
+.testimonial-container {
+    display: flex;
+    /* justify-content: space-between; */
+    flex-wrap: wrap;
+    gap: 30px;
+    align-items: stretch;
+    margin-top: 20px;
+}
+
+.testimonial {
+    background-color: #fff;
+    border-radius: 10px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+    padding: 30px;
+    width: 300px; /* Keeps the same width */
+    min-height: 250px; /* Same height as before */
+    text-align: left;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.testimonial:hover {
+    transform: translateY(-10px); /* Slight hover effect */
+    box-shadow: 0 6px 15px rgba(0, 0, 0, 0.2);
+}
+
+.testimonial-text {
+    font-size: 1.9rem;
+    color: #555;
+    line-height: 1.6;
+    margin-bottom: 20px;
+    font-style: italic; /* Italicize the testimonial text for better visual appeal */
+}
+
+.testimonial-author {
+    font-size: 1.2rem;
+    font-weight: 600;
+    color: #007bff; /* Blue color for author name */
+    margin-top: 10px;
+    letter-spacing: 1px; /* Small letter spacing for a cleaner look */
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+    .testimonial-container {
+        justify-content: center;
+        flex-direction: column;
+        align-items: center;
+    }
+
+    .testimonial {
+        width: 80%;
+        margin-bottom: 20px;
+    }
+
+    .testimonial-heading {
+        font-size: 3rem; /* Adjust heading size for smaller screens */
+    }
+}
+
+</style>

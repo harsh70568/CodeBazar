@@ -42,18 +42,22 @@ class Login(BaseModel):
 class ContactUs(BaseModel):
     name: str
     email: str
-    phone_no: str
+    subject: str
     message: str
 
 @app.post("/api/register")
 async def register_user(details: RegisterForm):
     try:
-        new_entry = await sync_to_async(Register.objects.create)(
+        user = await sync_to_async(get_user_by_email)(details.email)
+        if user:
+            return {"msg": "User is already registered with us!", "name": "None"}
+        else:
+            new_entry = await sync_to_async(Register.objects.create)(
             name=details.name,
             email=details.email,
             password=make_password(details.password)
         )
-        return {"msg" : "user is registered sucesfully", "name": details.name}
+            return {"msg" : "User is registered sucesfully", "name": details.name}
 
     except ValidationError as e:
         raise HTTPException(status_code=400, detail=f"Validation Error: {e}")
@@ -61,12 +65,11 @@ async def register_user(details: RegisterForm):
 @app.post("/api/login")
 async def login_user(details: Login):
     try:
-        # Check if user exists with the provided email
         user = await sync_to_async(get_user_by_email)(details.email)
         if not user:
             return {"msg" : "Email not exists"}
         if not check_password(details.password, user.password):
-            return {"msg": "Password do not match, Try again!"}
+            return {"msg": "Invalid Credentials, Try again!"}
         return {"msg": "Succesfully Logged in", "username": user.name}
 
     except Exception as e:
@@ -85,7 +88,7 @@ async def contact_us(details: ContactUs):
         new_entry = await sync_to_async(Contact.objects.create)(
             name=details.name,
             email=details.email,
-            phone_no=details.phone_no,
+            subject=details.subject,
             message=details.message
         )
         return {"msg": "Your message has been sent successfully!"}

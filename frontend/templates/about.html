@@ -1,66 +1,141 @@
 {% load static %}
-<div class="responsive-container-block outer-container" , id="aboutid"></div>
-    <div class="responsive-container-block inner-container">
-        <p class="text-blk section-head-text">
-            Meet Our Expert Instructors
-        </p>
-        <p class="text-blk section-subhead-text">
-            Grow Yourself with Us
-        </p>
-        <div class="responsive-container-block">
-            <div class="responsive-cell-block wk-desk-3 wk-ipadp-3 wk-tab-6 wk-mobile-12 team-card-container">
-                <div class="team-card">
-                    <div class="img-wrapper">
-                        <img class="team-img" src="{% static '../static/images/about.png' %}">
-                    </div>
-                    <p class="text-blk name">
-                        Harsh Jain
-                    </p>
-                    <p class="text-blk position">
-                        Instructor
-                    </p>
-                    <div class="social-media-links">
-                        <a href="https://www.linkedin.com/in/harsh-jain-92b67b20a/" target="_blank">
-                           <img width="25" height="25" src="https://img.icons8.com/color/25/linkedin.png" alt="linkedin"/>
-                        </a>
-                        <a href="https://leetcode.com/iamharsh07/" target="_blank">
-                            <img width="24" height="24" src="https://img.icons8.com/external-tal-revivo-color-tal-revivo/24/external-level-up-your-coding-skills-and-quickly-land-a-job-logo-color-tal-revivo.png" alt="Leetcode"/>
-                        </a>
-                        <a href="http://www.instagram.com/" target="_blank"></a>
-                            <img
-                                src="https://workik-widget-assets.s3.amazonaws.com/widget-assets/images/gray-insta.svg">
+<div class="container-fluid mt-5" id="aboutid">
+    <p class="text-center section-head-text mb-4">
+        Meet Our Expert Instructors
+    </p>
+    <p class="text-center section-subhead-text mb-5">
+        Grow Yourself with Us
+    </p>
+    <div class="row justify-content-center">
+        <!-- Team Member 1 -->
+        <div class="col-md-4 col-sm-6 col-12 mb-4">
+            <div class="card team-card h-100 shadow-lg border-0 rounded">
+                <div class="img-wrapper p-3">
+                    <img class="card-img-top team-img rounded-circle" src="{% static '../static/images/aman.jpg' %}"
+                        alt="Aman">
+                </div>
+                <div class="card-body d-flex flex-column justify-content-between text-center">
+                    <p class="card-title name font-weight-bold">Aman Agarwal</p>
+                    <div class="d-flex justify-content-center align-items-center">
+                        <p class="card-text position text-muted mb-0">Founder</p>
+                        <a href="https://www.linkedin.com/in/aman-agarwal-65a674215/" target="_blank" class="ml-2">
+                            <img width="30" height="30" src="https://img.icons8.com/color/30/linkedin.png"
+                                alt="LinkedIn" />
                         </a>
                     </div>
+                    <!-- Bullet points under the image -->
+                    <ul class="list-unstyled mt-3">
+                        <li><i class="fas fa-check-circle"></i> Taught 15k+ Students through BtechFactory</li>
+                        <li class="d-flex justify-content-center align-items-center">
+                            <i class="fas fa-check-circle"></i> 15K+ on YouTube 
+                            <a href="https://www.youtube.com/@TheBtechFactory" target="_blank" class="ml-2">
+                                <img width="30" height="30" src="https://img.icons8.com/color/30/youtube.png"
+                                    alt="YouTube" />
+                            </a>
+                        </li>
+                    </ul>
                 </div>
             </div>
-            <div class="responsive-cell-block wk-desk-3 wk-ipadp-3 wk-tab-6 wk-mobile-12 team-card-container">
-                <div class="team-card">
-                    <div class="img-wrapper">
-                        <img class="team-img"
-                            src="{% static '../static/images/aman.jpg' %}">
-                    </div>
-                    <p class="text-blk name">
-                        Aman
-                    </p>
-                    <p class="text-blk position">
-                        Instructor
-                    </p>
-                    <div class="social-media-links">
-                        <a href="https://www.linkedin.com/in/aman-agarwal-65a674215/" target="_blank">
-                            <img width="25" height="25" src="https://img.icons8.com/color/25/linkedin.png" alt="linkedin"/>
-                        </a>
-                        <a href="https://leetcode.com/amanagarwal247776/" target="_blank">
-                             <img width="24" height="24" src="https://img.icons8.com/external-tal-revivo-color-tal-revivo/24/external-level-up-your-coding-skills-and-quickly-land-a-job-logo-color-tal-revivo.png" alt="Leetcode"/>
-                        </a>
-                        <a href="http://www.instagram.com/" target="_blank">
-                            <img
-                                src="https://workik-widget-assets.s3.amazonaws.com/widget-assets/images/gray-insta.svg">
-                        </a>
-                    </div>
-                </div>
-            </div>
-
-
         </div>
+
+        <!-- Team Member 2 -->
+        <div class="col-md-4 col-sm-6 col-12 mb-4">
+            <div class="card team-card h-100 shadow-lg border-0 rounded">
+                <div class="img-wrapper p-3">
+                    <img class="card-img-top team-img rounded-circle" src="{% static '../static/images/about.png' %}"
+                        alt="Harsh Jain">
+                </div>
+                <div class="card-body d-flex flex-column justify-content-between text-center">
+                    <p class="card-title name font-weight-bold">Harsh Jain</p>
+                    <div class="d-flex justify-content-center align-items-center">
+                        <p class="card-text position text-muted mb-0">Instructor</p>
+                        <a href="https://www.linkedin.com/in/harsh-jain-92b67b20a/" target="_blank" class="ml-2">
+                            <img width="30" height="30" src="https://img.icons8.com/color/30/linkedin.png"
+                                alt="LinkedIn" />
+                        </a>
+                    </div>
+                    <!-- Bullet points under the image -->
+                    <ul class="list-unstyled mt-3">
+                        <li><i class="fas fa-check-circle"></i> SDE at Staqu Technologies, Ex - Epay Systems</li>
+                        <li class="d-flex justify-content-center align-items-center">
+                            <i class="fas fa-check-circle"></i> Mentored 2k+ Students 
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
     </div>
 </div>
+
+<style>
+    .card-body {
+        position: relative;
+        padding-bottom: 40px;
+        /* Add some space for the LinkedIn icon */
+    }
+
+    .social-media-links {
+        position: absolute;
+        bottom: 10px;
+        right: 10px;
+    }
+
+    ul.list-unstyled {
+        list-style-type: none;
+        padding-left: 0;
+        font-size: 14px;
+        color: #555;
+    }
+
+    ul.list-unstyled li {
+        display: flex;
+        align-items: center;
+        margin-bottom: 5px;
+    }
+
+    ul.list-unstyled li i {
+        margin-right: 10px;
+        color: #28a745;
+        /* Green check-circle */
+    }
+
+    /* Centering the "Grow Yourself with Us" text */
+    .section-subhead-text {
+        margin-left: 500px
+    }
+
+    /* Hover effect for cards */
+    .card:hover {
+        transform: scale(1.05);
+        transition: transform 0.3s ease-in-out;
+        box-shadow: 0px 12px 24px rgba(0, 0, 0, 0.1);
+    }
+
+    .card-body {
+        padding: 20px;
+    }
+
+    .card-title {
+        font-size: 22px;
+        color: #333;
+        font-weight: bold;
+    }
+
+    .card-text.position {
+        font-size: 16px;
+        color: #777;
+    }
+
+    .team-card {
+        background-color: #fff;
+        border-radius: 15px;
+        box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
+    }
+
+    /* Adding some spacing around the images */
+    .card-img-top {
+        margin: 0 auto;
+        display: block;
+    }
+</style>
