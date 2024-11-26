@@ -23,3 +23,15 @@ class Contact(models.Model):
 
     class Meta:
         db_table = 'queries'
+
+class bookSession(models.Model):
+    name = models.CharField(max_length=50)
+    email = models.CharField(max_length=50)
+    whatsapp_no = models.CharField(max_length=10)
+    interview_date = models.DateField()
+    interview_time = models.TimeField()
+    amount = models.IntegerField()
+    image = models.ImageField(upload_to="../media")
+
+    class Meta:
+        db_table = 'bookings'

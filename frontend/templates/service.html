@@ -1,3 +1,4 @@
+{% load static %}
 <div class="container-fluid mt-5 about-style" id="serviceid">
     <div class="row">
         <div class="col-md-10 col-12 mx-auto">
@@ -15,7 +16,7 @@
                             <li><i class="bi bi-check-circle"></i> Real-world insights</li>
                         </ul>
                         <div class="text-center">
-                            <a href="https://your-redirect-url.com" class="btn btn-primary btn-lg book-btn">Book Now</a>
+                            <a href="#bookingModal" class="btn btn-primary btn-lg book-btn" data-price="300">Book Now</a>
                         </div>
                     </div>
                 </div>
@@ -31,7 +32,7 @@
                             <li><i class="bi bi-check-circle"></i> Practical examples</li>
                         </ul>
                         <div class="text-center">
-                            <a href="https://your-redirect-url.com" class="btn btn-primary btn-lg book-btn">Book Now</a>
+                            <a href="#bookingModal" class="btn btn-primary btn-lg book-btn" data-price="400">Book Now</a>
                         </div>
                     </div>
                 </div>
@@ -47,7 +48,7 @@
                             <li><i class="bi bi-check-circle"></i> Feedback from Experts</li>
                         </ul>
                         <div class="text-center">
-                            <a href="https://your-redirect-url.com" class="btn btn-primary btn-lg book-btn">Book Now</a>
+                            <a href="#bookingModal" class="btn btn-primary btn-lg book-btn" data-price="500">Book Now</a>
                         </div>
                     </div>
                 </div>
@@ -63,7 +64,7 @@
                             <li><i class="bi bi-check-circle"></i> Each step explained</li>
                         </ul>
                         <div class="text-center">
-                            <a href="https://your-redirect-url.com" class="btn btn-primary btn-lg book-btn">Book Now</a>
+                            <a href="#bookingModal" class="btn btn-primary btn-lg book-btn" data-price="600">Book Now</a>
                         </div>
                     </div>
                 </div>
@@ -79,7 +80,7 @@
                             <li><i class="bi bi-check-circle"></i> Focused & Result-driven</li>
                         </ul>
                         <div class="text-center">
-                            <a href="https://your-redirect-url.com" class="btn btn-primary btn-lg book-btn">Book Now</a>
+                            <a href="#bookingModal" class="btn btn-primary btn-lg book-btn" data-price=700">Book Now</a>
                         </div>
                     </div>
                 </div>
@@ -95,7 +96,7 @@
                             <li><i class="bi bi-check-circle"></i> Personal advice</li>
                         </ul>
                         <div class="text-center">
-                            <a href="https://your-redirect-url.com" class="btn btn-primary btn-lg book-btn">Book Now</a>
+                            <a href="#bookingModal" class="btn btn-primary btn-lg book-btn" data-price="100">Book Now</a>
                         </div>
                     </div>
                 </div>
@@ -104,10 +105,144 @@
     </div>
 </div>
 
-<!-- Include Bootstrap Icons CDN -->
+<!-- Payment Modal -->
+<div class="modal fade" id="bookingModal" tabindex="-1" aria-labelledby="bookingModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content shadow-lg rounded-4">
+            <div class="modal-header bg-primary text-white rounded-top-4">
+                <h5 class="modal-title" id="bookingModalLabel">Book Your Session</h5>
+                <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal"
+                    aria-label="Close"></button>
+            </div>
+            <div class="modal-body p-4" style="min-height: 550px;"> <!-- Adjusted min-height for better visibility -->
+                <form id="bookingForm">
+                    <!-- Name -->
+                    <div class="mb-3">
+                        <label for="userName" class="form-label">Name</label>
+                        <input type="text" class="form-control shadow-sm" id="userName"
+                            placeholder="Enter your full name" required>
+                    </div>
+                    <!-- Email -->
+                    <div class="mb-3">
+                        <label for="userEmail" class="form-label">Email</label>
+                        <input type="email" class="form-control shadow-sm" id="userEmail"
+                            placeholder="Enter your email address" required>
+                    </div>
+                    <!-- WhatsApp Number -->
+                    <div class="mb-3">
+                        <label for="userWhatsapp" class="form-label">WhatsApp Number</label>
+                        <input type="tel" class="form-control shadow-sm" id="userWhatsapp" pattern="[0-9]{10}"
+                            placeholder="Enter 10-digit number" required>
+                    </div>
+                    <!-- Interview Date -->
+                    <div class="mb-3">
+                        <label for="interviewDate" class="form-label">Select Interview Date</label>
+                        <input type="date" class="form-control shadow-sm" id="interviewDate" required>
+                    </div>
+                    <!-- Interview Time -->
+                    <div class="mb-3">
+                        <label for="interviewTime" class="form-label">Select Interview Time</label>
+                        <select class="form-select shadow-sm" id="interviewTime" required></select>
+                    </div>
+                    <!-- Pay Now Button -->
+                    <div class="text-center my-4">
+                        <button type="button" class="btn btn-primary btn-lg w-100 shadow" id="payButton">
+                            Pay Now ₹300
+                        </button>
+                    </div>
+                    <!-- File Upload -->
+                    <div class="mb-3">
+                        <label for="paymentScreenshot" class="form-label">Upload Payment Screenshot</label>
+                        <input type="file" class="form-control shadow-sm" id="paymentScreenshot" accept="image/*"
+                            required>
+                    </div>
+                    <!-- Submit Button -->
+                    <div class="text-center my-4">
+                        <button type="submit" class="btn btn-success btn-lg w-100 shadow">Submit</button>
+                        <!-- Added Submit Button -->
+                    </div>
+                    <!-- QR Code and Close Button -->
+                    <div id="qrOverlay" class="qr-overlay d-none">
+                        <div class="qr-content">
+                            <h6>Scan to Pay</h6>
+                            <img src="{% static '../static/images/QR_Code_Harsh.jpg' %}" alt="QR Code"
+                                class="img-fluid rounded mb-3 shadow">
+                            <button id="closeQrOverlay" class="btn btn-success mt-3">Close</button>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-icons/1.8.1/font/bootstrap-icons.min.css">
 
 <style>
+    #paymentScreenshot {
+        height: 100%;
+        /* Make the file input field take up the full height of the container */
+        padding: 0.375rem 0.75rem;
+        /* Adjust padding to align with the input height */
+    }
+
+    .modal-content {
+        border-radius: 1rem;
+    }
+
+    .modal-header {
+        border-bottom: none;
+        padding-bottom: 0.5rem;
+    }
+
+    .modal-body label {
+        font-weight: 500;
+        color: #333;
+    }
+
+    .form-control,
+    .form-select {
+        border-radius: 0.5rem;
+    }
+
+    #payButton {
+        background: linear-gradient(90deg, #007bff, #0056b3);
+        border: none;
+    }
+
+    #payButton:hover {
+        background: linear-gradient(90deg, #0056b3, #003d73);
+    }
+
+    .qr-overlay {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background: rgba(0, 0, 0, 0.6);
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        z-index: 1050;
+    }
+
+    .qr-content {
+        background: #fff;
+        padding: 20px;
+        border-radius: 12px;
+        text-align: center;
+        width: 300px;
+        box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+    }
+
+    .btn:hover {
+        transform: translateY(-2px);
+    }
 
     .box {
         background: #ffffff;
@@ -120,7 +255,7 @@
     }
 
     .box:hover {
-        transform: translateY(-10px) scale(1.05); /* Added scale effect */
+        transform: translateY(-10px) scale(1.05);
         box-shadow: 0 10px 20px rgba(0, 0, 0, 0.15);
     }
 
@@ -130,7 +265,7 @@
         margin-bottom: 20px;
         color: #fff;
         letter-spacing: 1px;
-        text-shadow: 3px 3px 10px rgba(0, 0, 0, 0.2); /* Added text shadow for emphasis */
+        text-shadow: 3px 3px 10px rgba(0, 0, 0, 0.2);
     }
 
     .sub-heading {
@@ -146,7 +281,7 @@
         margin-bottom: 20px;
         color: #333;
         text-align: center;
-        text-shadow: 1px 1px 4px rgba(0, 0, 0, 0.15); /* Added subtle shadow */
+        text-shadow: 1px 1px 4px rgba(0, 0, 0, 0.15);
         transition: color 0.3s ease;
     }
 
@@ -189,3 +324,95 @@
         transform: scale(1.1);
     }
 </style>
+
+<script>
+    document.addEventListener('DOMContentLoaded', function () {
+        // Restrict date input to future dates only
+        const interviewDateInput = document.getElementById('interviewDate');
+        const today = new Date();
+        const minDate = new Date(today.setDate(today.getDate() + 1))
+            .toISOString()
+            .split('T')[0];
+        interviewDateInput.min = minDate;
+
+        const interviewTimeSelect = document.getElementById('interviewTime');
+        populateTimeOptions(interviewTimeSelect);
+
+        function populateTimeOptions(selectElement) {
+            const startHour = 0;
+            const endHour = 24;
+            for (let hour = startHour; hour < endHour; hour++) {
+                const time = new Date();
+                time.setHours(hour, 0, 0);
+                const formattedTime = time.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' });
+                const option = document.createElement('option');
+                option.value = formattedTime;
+                option.textContent = formattedTime;
+                selectElement.appendChild(option);
+            }
+        }
+
+        // Event listener for "Book Now" buttons
+        document.querySelectorAll('.book-btn').forEach(button => {
+            button.addEventListener('click', function (e) {
+                e.preventDefault(); // Prevent default navigation
+                const bookingModal = new bootstrap.Modal(document.getElementById('bookingModal'));
+                bookingModal.show(); // Show the modal
+                // Get the price from the clicked button and display it in Pay Now button
+                const price = button.getAttribute('data-price');
+                document.getElementById('payButton').textContent = `Pay Now ₹${price}`;
+                document.getElementById('payButton').setAttribute('data-price', price);
+            });
+        });
+
+        // Handle Pay Button Click
+        document.getElementById('payButton').addEventListener('click', function () {
+            // Get the price
+            const price = this.getAttribute('data-price');
+
+            // Validate form fields
+            const userName = document.getElementById('userName').value;
+            const userEmail = document.getElementById('userEmail').value;
+            const userWhatsapp = document.getElementById('userWhatsapp').value;
+            const interviewDate = document.getElementById('interviewDate').value;
+            const interviewTime = document.getElementById('interviewTime').value;
+            //const paymentScreenshot = document.getElementById('paymentScreenshot').files.length;
+
+            // Check if any field is missing
+            if (!userName || !userEmail || !userWhatsapp || !interviewDate || !interviewTime) {
+                alert('Please fill in all the required details.');
+                return; // Stop further execution if fields are missing
+            }
+
+            // Show the QR code overlay if all fields are filled
+            const qrOverlay = document.getElementById('qrOverlay');
+            qrOverlay.classList.remove('d-none');
+            this.disabled = true; // Disable the pay button
+            this.textContent = `Payment Pending... ₹${price}`; // Update the text with the selected price
+        });
+
+        // Handle Form Submission
+        document.getElementById('bookingForm').addEventListener('submit', function (event) {
+            event.preventDefault(); // Prevent form submission
+            alert('Booking successful! Our Team will verify your payment and will send you an email soon!');
+            const bookingModal = bootstrap.Modal.getInstance(document.getElementById('bookingModal'));
+            bookingModal.hide(); // Close the modal
+            // Optionally reset the form
+            this.reset();
+            // Hide QR Section
+            const qrOverlay = document.getElementById('qrOverlay');
+            qrOverlay.classList.add('d-none');
+            // Enable pay button and reset its text
+            document.getElementById('payButton').disabled = false;
+            document.getElementById('payButton').textContent = 'Pay Now ₹300';
+        });
+
+        document.getElementById('closeQrOverlay').addEventListener('click', function () {
+            const qrOverlay = document.getElementById('qrOverlay');
+            qrOverlay.classList.add('d-none'); // Hide the QR code overlay
+            // Enable the Pay button again and reset its text
+            document.getElementById('payButton').disabled = false;
+            document.getElementById('payButton').textContent = 'Pay Now ₹300';
+        });
+    });
+</script>
