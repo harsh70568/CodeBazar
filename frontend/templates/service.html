@@ -159,7 +159,6 @@
                     <!-- Submit Button -->
                     <div class="text-center my-4">
                         <button type="submit" class="btn btn-success btn-lg w-100 shadow">Submit</button>
-                        <!-- Added Submit Button -->
                     </div>
                     <!-- QR Code and Close Button -->
                     <div id="qrOverlay" class="qr-overlay d-none">
@@ -181,9 +180,7 @@
 <style>
     #paymentScreenshot {
         height: 100%;
-        /* Make the file input field take up the full height of the container */
         padding: 0.375rem 0.75rem;
-        /* Adjust padding to align with the input height */
     }
 
     .modal-content {
@@ -327,7 +324,6 @@
 
 <script>
     document.addEventListener('DOMContentLoaded', function () {
-        // Restrict date input to future dates only
         const interviewDateInput = document.getElementById('interviewDate');
         const today = new Date();
         const minDate = new Date(today.setDate(today.getDate() + 1))
@@ -352,65 +348,69 @@
             }
         }
 
-        // Event listener for "Book Now" buttons
         document.querySelectorAll('.book-btn').forEach(button => {
             button.addEventListener('click', function (e) {
-                e.preventDefault(); // Prevent default navigation
+                e.preventDefault(); 
                 const bookingModal = new bootstrap.Modal(document.getElementById('bookingModal'));
-                bookingModal.show(); // Show the modal
-                // Get the price from the clicked button and display it in Pay Now button
+                bookingModal.show(); 
                 const price = button.getAttribute('data-price');
                 document.getElementById('payButton').textContent = `Pay Now ₹${price}`;
                 document.getElementById('payButton').setAttribute('data-price', price);
             });
         });
 
-        // Handle Pay Button Click
         document.getElementById('payButton').addEventListener('click', function () {
-            // Get the price
             const price = this.getAttribute('data-price');
 
-            // Validate form fields
             const userName = document.getElementById('userName').value;
             const userEmail = document.getElementById('userEmail').value;
             const userWhatsapp = document.getElementById('userWhatsapp').value;
             const interviewDate = document.getElementById('interviewDate').value;
             const interviewTime = document.getElementById('interviewTime').value;
-            //const paymentScreenshot = document.getElementById('paymentScreenshot').files.length;
 
-            // Check if any field is missing
             if (!userName || !userEmail || !userWhatsapp || !interviewDate || !interviewTime) {
                 alert('Please fill in all the required details.');
-                return; // Stop further execution if fields are missing
+                return;
             }
 
-            // Show the QR code overlay if all fields are filled
             const qrOverlay = document.getElementById('qrOverlay');
             qrOverlay.classList.remove('d-none');
-            this.disabled = true; // Disable the pay button
-            this.textContent = `Payment Pending... ₹${price}`; // Update the text with the selected price
+            this.disabled = true; 
+            this.textContent = `Payment Pending... ₹${price}`;
         });
 
-        // Handle Form Submission
         document.getElementById('bookingForm').addEventListener('submit', function (event) {
-            event.preventDefault(); // Prevent form submission
-            alert('Booking successful! Our Team will verify your payment and will send you an email soon!');
-            const bookingModal = bootstrap.Modal.getInstance(document.getElementById('bookingModal'));
-            bookingModal.hide(); // Close the modal
-            // Optionally reset the form
-            this.reset();
-            // Hide QR Section
-            const qrOverlay = document.getElementById('qrOverlay');
-            qrOverlay.classList.add('d-none');
-            // Enable pay button and reset its text
-            document.getElementById('payButton').disabled = false;
-            document.getElementById('payButton').textContent = 'Pay Now ₹300';
+            event.preventDefault();
+
+            const formData = new FormData();
+            formData.append('name', document.getElementById('userName').value);
+            formData.append('email', document.getElementById('userEmail').value);
+            formData.append('whatsapp_no', document.getElementById('userWhatsapp').value);
+            formData.append('interview_date', document.getElementById('interviewDate').value);
+            formData.append('interview_time', document.getElementById('interviewTime').value);
+            formData.append('amount', document.getElementById('payButton').getAttribute('data-price'));
+            formData.append('image', document.getElementById('paymentScreenshot').files[0]);
+
+            fetch('http://localhost:7000/api/book-session', {
+                method: 'POST',
+                body: formData
+            })
+            .then(response => response.json())
+            .then((data => {
+                alert(data.msg);
+                const bookingModal = bootstrap.Modal.getInstance(document.getElementById('bookingModal'));
+                bookingModal.hide();
+                this.reset();
+            }))
+            .catch(error => {
+                console.log('Error:', error);
+                alert('There was an error processing your request. Please try again later.')
+            })
         });
 
         document.getElementById('closeQrOverlay').addEventListener('click', function () {
             const qrOverlay = document.getElementById('qrOverlay');
-            qrOverlay.classList.add('d-none'); // Hide the QR code overlay
-            // Enable the Pay button again and reset its text
+            qrOverlay.classList.add('d-none'); 
             document.getElementById('payButton').disabled = false;
             document.getElementById('payButton').textContent = 'Pay Now ₹300';
         });

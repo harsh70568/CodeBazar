@@ -28,8 +28,8 @@ class bookSession(models.Model):
     name = models.CharField(max_length=50)
     email = models.CharField(max_length=50)
     whatsapp_no = models.CharField(max_length=10)
-    interview_date = models.DateField()
-    interview_time = models.TimeField()
+    interview_date = models.CharField(max_length=50)
+    interview_time = models.CharField(max_length=50)
     amount = models.IntegerField()
     image = models.ImageField(upload_to="../media")
 
