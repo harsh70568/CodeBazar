@@ -131,5 +131,6 @@ async def book_session(
             image= image_url
         )
         return {"msg": "Our Team will verify your payment and will send you an email soon!", "booking_id": new_entry.id}
+        
     except Exception as e:
         raise HTTPException(status_code=500, detail=f"Error creating booking: {str(e)}")

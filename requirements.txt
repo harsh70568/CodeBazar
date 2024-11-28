@@ -1,0 +1,8 @@
+Django>=3.2
+fastapi
+pydantic
+uvicorn
+asgiref
+django-cors-headers
+python-multipart
+Pillow
