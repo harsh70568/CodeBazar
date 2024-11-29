@@ -124,7 +124,7 @@ STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
 
 # Adding the path to the 'static' folder inside the 'Frontend' app for Django to find it
 STATICFILES_DIRS = [
-    os.path.join(BASE_DIR, 'Frontend', 'static'),
+    os.path.join(BASE_DIR, 'frontend', 'static'),
 ]
 
 # Default primary key field type
