@@ -150,6 +150,7 @@
                 responseMessageElement.classList.remove('alert-danger');
                 responseMessageElement.classList.add('alert-success');
                 responseMessageElement.textContent = data.msg || 'Your message has been sent successfully!';
+                document.getElementById('contactForm').reset(); 
             } else {
                 responseMessageElement.classList.remove('alert-success');
                 responseMessageElement.classList.add('alert-danger');

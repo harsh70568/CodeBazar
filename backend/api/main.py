@@ -7,16 +7,16 @@ os.environ.setdefault('DJANGO_SETTINGS_MODULE', 'CodeBazar.settings')
 import django
 django.setup()
 
-from fastapi import FastAPI, HTTPException, Body
+from fastapi import FastAPI, File, UploadFile, HTTPException, Form
 from pydantic import BaseModel
 from django.conf import settings
-from django.db import IntegrityError
-from frontend.models import Register, Contact
+from frontend.models import Register, Contact, bookSession
 from django.core.exceptions import ValidationError
-from fastapi.responses import RedirectResponse
 from asgiref.sync import sync_to_async 
 from fastapi.middleware.cors import CORSMiddleware
 from django.contrib.auth.hashers import check_password, make_password
+from pathlib import Path
+import uuid
 
 app = FastAPI()
 
@@ -29,6 +29,9 @@ app.add_middleware(
     allow_methods=["*"], 
     allow_headers=["*"],
 )
+
+UPLOAD_FOLDER = Path("payment_images")
+UPLOAD_FOLDER.mkdir(parents=True, exist_ok=True) 
 
 class RegisterForm(BaseModel):
     name: str
@@ -95,3 +98,39 @@ async def contact_us(details: ContactUs):
 
     except ValidationError as e:
         raise HTTPException(status_code=400, detail=f"Validation Error: {e}")
+
+@app.post("/api/book-session")
+async def book_session(
+    name: str = Form(...),
+    email: str = Form(...),
+    whatsapp_no: str = Form(...),
+    interview_date: str = Form(...),
+    interview_time: str = Form(...),
+    amount: int = Form(...),
+    image: UploadFile = File(...)
+):
+    try:
+        if image:
+            if not image.content_type.startswith("image/"):
+                raise HTTPException(status_code=400, detail="Uploaded file is not an image")
+            unique_filename = f"{uuid.uuid4().hex}_{image.filename}"
+            image_path = UPLOAD_FOLDER / unique_filename
+            with image_path.open("wb") as file:
+                file.write(await image.read())
+
+            image_url = str(image_path)
+        else:
+            image_url = None
+        new_entry = await sync_to_async(bookSession.objects.create)(
+            name= name,
+            email= email,
+            whatsapp_no= whatsapp_no,
+            interview_date= interview_date,
+            interview_time= interview_time,
+            amount= amount,
+            image= image_url
+        )
+        return {"msg": "Our Team will verify your payment and will send you an email soon!", "booking_id": new_entry.id}
+        
+    except Exception as e:
+        raise HTTPException(status_code=500, detail=f"Error creating booking: {str(e)}")
