@@ -1,4 +1,5 @@
 pip install -r requirements.txt
+python manage.py collectstatic
 #python manage.py makemigrations frontend
 #python manage.py migrate
 python -m pip install --upgrade pip
