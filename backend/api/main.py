@@ -24,9 +24,9 @@ app = FastAPI()
     on PORT 8000, so make sure we allow origin of frontend as req comes from frontend to backend. '''
 app.add_middleware(
     CORSMiddleware,
-    allow_origins=["http://localhost:8000", "https://codebazar.onrender.com/"],
+    allow_origins=["http://localhost:8000", "https://codebazar.onrender.com"],
     allow_credentials=True,
-    allow_methods=["*"], 
+    allow_methods=["GET", "POST", "OPTIONS"], 
     allow_headers=["*"],
 )
 
