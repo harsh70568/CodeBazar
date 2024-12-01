@@ -386,7 +386,7 @@
             formData.append('amount', document.getElementById('payButton').getAttribute('data-price'));
             formData.append('image', document.getElementById('paymentScreenshot').files[0]);
 
-            fetch('https://codebazar.onrender.com/api/book-session', {
+            fetch('https://codebazar-backend.onrender.com/api/book-session', {
                 method: 'POST',
                 body: formData
             })
