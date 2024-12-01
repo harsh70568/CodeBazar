@@ -48,6 +48,10 @@ class ContactUs(BaseModel):
     subject: str
     message: str
 
+@app.get("/")
+async def read_root():
+    return {"message": "Welcome to the FastAPI homepage"}
+
 @app.post("/api/register")
 async def register_user(details: RegisterForm):
     try:
