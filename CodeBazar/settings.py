@@ -51,6 +51,8 @@ MIDDLEWARE = [
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
 ]
 
+CSRF_TRUSTED_ORIGINS = ['https://codebazar.onrender.com']
+
 ROOT_URLCONF = 'CodeBazar.urls'
 
 TEMPLATES = [
