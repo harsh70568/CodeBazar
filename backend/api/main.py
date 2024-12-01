@@ -48,6 +48,10 @@ class ContactUs(BaseModel):
     subject: str
     message: str
 
+@app.get("/")
+async def root():
+    return {"msg": "base page"}
+
 @app.post("/api/register")
 async def register_user(details: RegisterForm):
     try:
